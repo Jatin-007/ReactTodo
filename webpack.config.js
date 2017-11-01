@@ -20,9 +20,15 @@ module.exports = {
     filename: './public/bundle.js'
   },
   resolve: {
+    modulesDirectories: [
+      'node_modules', 
+      './app/components', // The useful feature of Module Directories is that we dont have to provide aliases for every component
+                          // instead it will look for automatically!!
+    ],
+
     root: __dirname,
     alias: {
-      applicationStyles: 'app/styles/app.scss',
+      applicationStyles: 'app/styles/app.scss'
     },
     extensions: ['', '.js', '.jsx']
   },
