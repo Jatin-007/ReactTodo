@@ -24,11 +24,13 @@ module.exports = {
       'node_modules', 
       './app/components', // The useful feature of Module Directories is that we dont have to provide aliases for every component
                           // instead it will look for automatically!!
+      './app/api'
     ],
 
     root: __dirname,
     alias: {
-      applicationStyles: 'app/styles/app.scss'
+      applicationStyles: 'app/styles/app.scss',
+      TodoAPI: 'app/api/TodoAPI.jsx'
     },
     extensions: ['', '.js', '.jsx']
   },

@@ -1,33 +1,24 @@
 var React = require ('react');
+var uuid = require ('node-uuid'); // provides a unique ID for every text we enter in the todoApp..
+var $ = require ('jquery');
+
 var TodoList = require ('TodoList');
 var AddTodo = require ('AddTodo');
 var TodoSearch = require ('TodoSearch');
-var AddTodo = require ('AddTodo');
-var uuid = require ('node-uuid'); // provides a unique ID for every text we enter in the todoApp..
+var TodoAPI = require ('TodoAPI');
 
 var TodoApp = React.createClass ({
     getInitialState: function () {
         return {
             showCompleted: false,
             SearchText: '',
-            todos: [
-                {
-                    id: uuid(),
-                    text: 'Walk the dog',
-                    completed: false
-                },
-                {
-                    id: uuid(),
-                    text: 'Clean the room',
-                    completed: true
-                },
-                {
-                    id: uuid(),
-                    text: 'Work with React',
-                    completed: true 
-                }
-            ]
+            todos: TodoAPI.getTodos()
+                 // this call will be used to inherit all the stored todos in the TodoAPI file
         };
+    },
+
+    componentDidUpdate: function (){
+        TodoAPI.setTodos(this.state.todos);
     },
 
     handleAddTodo: function (text) {
