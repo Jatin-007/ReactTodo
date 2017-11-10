@@ -29,5 +29,37 @@ module.exports = {
         // else{
         //     return [];
         // }
+    },
+
+    filterTodos: function (todos, showCompleted, searchText) {
+        var filteredTodos = todos;
+            
+        // filter by showCompleted
+        filteredTodos = filteredTodos.filter ((todo) => {
+            return !todo.completed || showCompleted; // ************ the TodoList will display the list of the list which are not completed and also if showCOmpleted becomes true, it will display each of them .. 
+        });
+        // filter is a built in method that helps you filter things based on existing method
+        // filter method requires callback for every item in array... 
+
+        filteredTodos = filteredTodos.filter((todo) => {
+            var text = todo.text.toLowerCase();
+            return searchText.length === 0 || text.indexOf(searchText) > -1;
+        });
+
+        // filter by SearchText
+        // Sort todos with non completed first
+        filteredTodos.sort ((a, b) => {
+            if(!a. completed && b.completed) {
+                return -1;
+            }
+            else if (a.completed && !b.completed){
+                return 1;
+            }
+            else {
+                return 0;
+            }
+        });
+
+        return filteredTodos;
     }
 };
