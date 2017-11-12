@@ -6,6 +6,11 @@ var TodoList = React.createClass ({
         var {todos} = this.props;
 
         var renderTodos = ()=> {
+
+            if(todos.length === 0) {
+                return <p className="container__message">Nothing to do</p>
+            }
+
             return todos.map((todo) => { // Todos.map takes a function and calls every element in the funciton and iterates
                 return (
                     <Todo key={todo.id} {...todo} onToggle={this.props.onToggle}/> // id is specified in hardcoded TodoApp.jsx file inside todos array !! ///// Key specifies the unique id in the element
