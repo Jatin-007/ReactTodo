@@ -6,6 +6,7 @@ var TodoList = require ('TodoList');
 var AddTodo = require ('AddTodo');
 var TodoSearch = require ('TodoSearch');
 var TodoAPI = require ('TodoAPI');
+var moment = require ('moment');
 
 var TodoApp = React.createClass ({
     getInitialState: function () {
@@ -28,7 +29,9 @@ var TodoApp = React.createClass ({
                 {
                     id: uuid(),
                     text: text,
-                    completed: false
+                    completed: false,
+                    createdAt: moment().unix(),
+                    completedAt: undefined
                 }
             ]
         });
@@ -38,6 +41,7 @@ var TodoApp = React.createClass ({
         var updatedTodos = this.state.todos.map((todo)=> { // iterates from each and every todo id to match the one that is toggled
             if(todo.id === id){ 
                 todo.completed = !todo.completed; //if todo.completed was set equal to false, the next operation helps to change the value to its opposite... 
+                todo.completedAt = todo.completed ? moment().unix() : undefined;
             }
             return todo;
         });
