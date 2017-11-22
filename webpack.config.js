@@ -30,7 +30,7 @@ module.exports = {
     root: __dirname,
     alias: {
       applicationStyles: 'app/styles/app.scss',
-      TodoAPI: 'app/api/TodoAPI.jsx'
+      actions: 'app/actions/actions.jsx',
     },
     extensions: ['', '.js', '.jsx']
   },
