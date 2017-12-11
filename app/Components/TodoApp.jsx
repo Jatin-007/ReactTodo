@@ -2,17 +2,17 @@ var React = require ('react');
 var uuid = require ('node-uuid'); // provides a unique ID for every text we enter in the todoApp..
 var $ = require ('jquery');
 
-var TodoList = require ('TodoList');
-var AddTodo = require ('AddTodo');
+import TodoList from 'TodoList';
+import AddTodo from 'AddTodo';
 var TodoSearch = require ('TodoSearch');
 var TodoAPI = require ('TodoAPI');
-var moment = require ('moment');
+var moment = require ('moment'); // provides time to be displayed to show CreatedAt function 
 
 var TodoApp = React.createClass ({
     getInitialState: function () {
         return {
             showCompleted: false,
-            SearchText: '',
+            searchText: '',
             todos: TodoAPI.getTodos()
                  // this call will be used to inherit all the stored todos in the TodoAPI file
         };
@@ -36,28 +36,16 @@ var TodoApp = React.createClass ({
             ]
         });
     },
-
-    handleToggle: function (id) {
-        var updatedTodos = this.state.todos.map((todo)=> { // iterates from each and every todo id to match the one that is toggled
-            if(todo.id === id){ 
-                todo.completed = !todo.completed; //if todo.completed was set equal to false, the next operation helps to change the value to its opposite... 
-                todo.completedAt = todo.completed ? moment().unix() : undefined;
-            }
-            return todo;
-        });
-        this.setState({todos: updatedTodos});
-    },
-
-    handleSearch : function (showCompleted, SearchText) {
+    handleSearch : function (showCompleted, searchText) {
         this.setState({
             showCompleted: showCompleted,
-            SearchText: SearchText.toLowerCase()
+            searchText: searchText.toLowerCase()
         });
     },
 
     render: function () {
-        var {todos, showCompleted, SearchText} = this.state;
-        var filteredTodos = TodoAPI.filterTodos(todos, showCompleted, SearchText);
+        var {todos, showCompleted, searchText} = this.state;
+        var filteredTodos = TodoAPI.filterTodos(todos, showCompleted, searchText);
 
         return (
             <div>
@@ -67,7 +55,7 @@ var TodoApp = React.createClass ({
                     <div className="column small-centered small-11 medium-6 large-5">
                         <div className="container ">
                             <TodoSearch onSearch = {this.handleSearch}/>
-                            <TodoList todos = {filteredTodos} onToggle = {this.handleToggle}/>
+                            <TodoList/>
                             <AddTodo onAddTodo = {this.handleAddTodo}/>
                         </div>
                     </div>

@@ -1,4 +1,4 @@
-var uuid = require ('node-uuid');
+var uuid = require ('node-uuid'); // uuid is to provide a unique id for every todo element created
 var moment = require ('moment');
 
 export var searchTextReducer = (state = '', action)=> { 
@@ -16,7 +16,7 @@ export var showCompletedReducer = (state = false, action) => {
             return !state;
         default:
             return state;
-    }
+    };
 } 
 
 export var todosReducer = (state = [], action)=> {
@@ -43,9 +43,10 @@ export var todosReducer = (state = [], action)=> {
                         completed: nextCompleted,
                         completedAt: nextCompleted ? moment().unix() : undefined
                     };
-                };
+                } else {
+                    return todo;
+                }
             });
-
         default:
             return state;
     }

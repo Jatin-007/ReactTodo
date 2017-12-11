@@ -3,31 +3,36 @@ var ReactDOM = require ('react-dom');
 var expect = require('expect');
 var $ = require ('jQuery');
 var TestUtils = require ('react-addons-test-utils');
-var AddTodo = require('AddTodo');
+
+var {AddTodo} = require('AddTodo');
 
 describe ('AddTodo', ()=> {
     it('should exist', ()=> {
         expect(AddTodo).toExist();
     });
 
-    it('should call onAddTodo with valid data', ()=> {
+    it('should dispatch ADD_TODO when valid todo text', ()=> {
         var todoText = 'Check mail';
+        var action = {
+            type: 'ADD_TODO',
+            text: todoText
+        }
         var spy = expect.createSpy(); 
         // special funciton created by expect library It helps to validate the data passed inside onAddTodo function    
-        var addTodo = TestUtils.renderIntoDocument(<AddTodo onAddTodo={spy}/>);
+        var addTodo = TestUtils.renderIntoDocument(<AddTodo dispatch={spy}/>);
         var $el =$(ReactDOM.findDOMNode(addTodo));
 
         addTodo.refs.todoText.value= todoText;
         TestUtils.Simulate.submit($el.find('form')[0]);
 
-        expect(spy).toHaveBeenCalledWith(todoText);
+        expect(spy).toHaveBeenCalledWith(action);
     });
 
-    it('should not call onAddTodo with invalid data', ()=> {
+    it('should not dispatch ADD_TODO when invalid todo Text', ()=> {
         var todoText = '';
         var spy = expect.createSpy();
 
-        var addTodo = TestUtils.renderIntoDocument(<AddTodo onAddTodo={spy}/>);
+        var addTodo = TestUtils.renderIntoDocument(<AddTodo dispatch={spy}/>);
         var $el = $(ReactDOM.findDOMNode(addTodo));
 
         addTodo.refs.todoText.value= todoText;
