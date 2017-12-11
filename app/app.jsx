@@ -12,10 +12,6 @@ store.subscribe(() => {
   console.log('New State', store.getState()); // to provide information inside the console tab under developer tools
 });
 
-store.dispatch (actions.addTodo('Clean the Yard'));
-store.dispatch (actions.setSearchText('Yard'));
-store.dispatch (actions.toggleShowCompleted());
-
 // Load Foundation
 require('style!css!foundation-sites/dist/foundation.min.css');
 $(document).foundation();

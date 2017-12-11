@@ -4,7 +4,7 @@ var $ = require ('jquery');
 
 import TodoList from 'TodoList';
 import AddTodo from 'AddTodo';
-var TodoSearch = require ('TodoSearch');
+import TodoSearch from 'TodoSearch';
 var TodoAPI = require ('TodoAPI');
 var moment = require ('moment'); // provides time to be displayed to show CreatedAt function 
 
