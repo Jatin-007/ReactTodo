@@ -42,9 +42,11 @@ module.exports = {
         // filter method requires callback for every item in array... 
 
         filteredTodos = filteredTodos.filter((todo) => {
+            debugger;
             var text = todo.text.toLowerCase();
             return searchText.length === 0 || text.indexOf(searchText) > -1;
-        });
+          });
+      
 
         // filter by SearchText
         // Sort todos with non completed first
